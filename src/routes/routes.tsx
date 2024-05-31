@@ -1,6 +1,8 @@
 import { lazy } from "react";
 import { Navigate, Outlet, useRoutes } from "react-router-dom";
 import LoginPrivateRoute from "../components/LoginPrivateRoute";
+import LoggedInPrivateRoute from "../components/LoggedInPrivateRoute";
+import LayoutMain from "../layout/main/layout-main";
 
 /* -----------------------------AUTH--------------------------------- */
 
@@ -24,7 +26,9 @@ const Router = () => {
     {
       element: (
         <LoginPrivateRoute>
-          <Outlet />
+          <LayoutMain>
+            <Outlet />
+          </LayoutMain>
         </LoginPrivateRoute>
       ),
       children: [
@@ -38,7 +42,14 @@ const Router = () => {
       path: "auth",
       element: <Outlet />,
       children: [
-        { path: "login", element: <Login /> },
+        {
+          path: "login",
+          element: (
+            <LoggedInPrivateRoute>
+              <Login />
+            </LoggedInPrivateRoute>
+          ),
+        },
         { path: "logout", element: <Logout /> },
         { path: "signup", element: <Signup /> },
         { path: "access", element: <AccessDeniedPage /> },
