@@ -1,3 +1,12 @@
-@import "./value.scss";
-@import "./common.scss";
-@import "./footer.scss";
+@import "./_footer.scss";
+@import "./_sidebar.scss";
+@import "./_content.scss";
+@import "./_topbar.scss";
+
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(245, 245, 245);
+}

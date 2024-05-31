@@ -1,0 +1,15 @@
+.topbar {
+  @apply shadow;
+
+  position: fixed;
+  height: 5rem;
+  z-index: 997;
+  left: 0;
+  top: 0;
+  width: 100%;
+  padding: 0 2rem;
+  background-color: white;
+  transition: left 0.2s;
+  display: flex;
+  align-items: center;
+}

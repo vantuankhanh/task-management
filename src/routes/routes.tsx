@@ -25,6 +25,14 @@ const Router = () => {
   const routes = useRoutes([
     {
       element: (
+        <LoggedInPrivateRoute>
+          <Homepage />
+        </LoggedInPrivateRoute>
+      ),
+      index: true,
+    },
+    {
+      element: (
         <LoginPrivateRoute>
           <LayoutMain>
             <Outlet />
@@ -32,7 +40,6 @@ const Router = () => {
         </LoginPrivateRoute>
       ),
       children: [
-        { element: <Homepage />, index: true },
         { path: "users", element: <Users /> },
         { path: "tasks", element: <Tasks /> },
         { path: "messages", element: <Messages /> },

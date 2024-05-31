@@ -6,7 +6,7 @@ const LoggedInPrivateRoute = ({ children }: IChildrenProps) => {
   if (checkLoggedStorage()) {
     return <Navigate to="/" />;
   }
-  return <>{children}</>;
+  return <div className="w-screen h-screen">{children}</div>;
 };
 
 export default LoggedInPrivateRoute;

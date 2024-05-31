@@ -1,79 +1,145 @@
-import { SubmitHandler, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-
-type Inputs = {
-  email: string;
-  password: string;
-};
+import ArowBackIcon from "@rsuite/icons/ArowBack";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, Input } from "rsuite";
 
 const Login = () => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const nav = useNavigate();
 
-  console.log(watch());
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneSubmit, setPhoneSubmit] = useState("");
+
+  const onPhoneNumberChange = (e: string) => {
+    if (e.match(/^\d+$/) || e === "") {
+      setPhoneNumber(e);
+    }
+  };
+
+  // TODO: call api send otp
+  const onSubmitPhone = () => {
+    if (phoneNumber.match(/^\d+$/)) {
+      setPhoneSubmit(phoneNumber);
+    }
+  };
+
+  const [code, setCode] = useState("");
+
+  const onCodeChange = (e: string) => {
+    if (e.match(/^\d+$/) || e.length <= 6) {
+      setCode(e);
+    }
+  };
+
+  // TODO: submit otp
+  const onSubmitCode = () => {};
+
+  const onBackClick = () => {
+    if (phoneSubmit) {
+      setPhoneNumber("");
+      setPhoneSubmit("");
+    } else {
+      nav("/");
+    }
+  };
+
+  // TODO: resen otp
+  const onResendCode = () => {};
 
   return (
-    <div className="surface-ground box-center min-h-screen min-w-screen overflow-hidden ">
-      <div className="box-center flex-col">
-        <div
-          style={{
-            borderRadius: "56px",
-            padding: "0.3rem",
-            background:
-              "linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%)",
-          }}
-        >
-          <div
-            className="w-full surface-card py-20 px-8 sm:px-20"
-            style={{ borderRadius: "53px" }}
-          >
+    <div className="box-center flex-col bg-white min-h-full min-w-full overflow-hidden px-4">
+      <div
+        className="bg-white py-20 px-8 sm:px-20 shadow-xl rounded-xl relative "
+        style={{ maxWidth: "26rem" }}
+      >
+        <div className="absolute top-0 left-0 p-5">
+          <Button appearance="subtle" onClick={onBackClick}>
+            <div className="box-center gap-2">
+              <ArowBackIcon />
+              <span className="font-bold">Back</span>
+            </div>
+          </Button>
+        </div>
+
+        {!phoneSubmit ? (
+          <div>
             <div className="text-center mb-8">
               <div className="text-gray-900 text-3xl font-bold mb-3">
-                WELCOME!
+                Sign In
               </div>
               <span className="text-gray-500 font-medium">
-                Sign in to continue
+                Enter your phone to sign in
               </span>
             </div>
 
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="mb-4">
-                <input
-                  className="w-full md:w-64 outline-none"
-                  type="text"
-                  placeholder="Email"
-                  {...register("email", {
-                    required: true,
-                    maxLength: 80,
-                    pattern:
-                      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
-                  })}
-                />
-                {errors.email && <span>This field is required</span>}
-              </div>
+            <div>
+              <Input
+                className="w-full"
+                placeholder="Your Phone Number"
+                value={phoneNumber}
+                onChange={onPhoneNumberChange}
+                autoComplete="tel-national"
+              />
+            </div>
 
-              <div className="mb-4">
-                <input
-                  className="w-full outline-none"
-                  type="password"
-                  placeholder="Password"
-                  {...register("password", { required: true })}
-                />
-                {errors.password && <span>This field is required</span>}
-              </div>
-
-              <input type="submit" />
-            </form>
-
-            <div className="mt-6 text-center">
-              Don't have an account? <Link to="/auth/signup">Sign Up</Link>
+            <div className="mt-6">
+              <Button
+                disabled={!phoneNumber}
+                className="w-full"
+                color="blue"
+                appearance="primary"
+                onClick={onSubmitPhone}
+              >
+                Next
+              </Button>
             </div>
           </div>
+        ) : (
+          <div>
+            <div className="text-center mb-8">
+              <div className="text-gray-900 text-3xl font-bold mb-3">
+                Phone verification
+              </div>
+              <span className="text-gray-500 font-medium">
+                Please enter your code that send to your phone
+              </span>
+            </div>
+
+            <div>
+              <Input
+                className="w-full"
+                placeholder="Enter your code"
+                value={code}
+                onChange={onCodeChange}
+              />
+            </div>
+
+            <div className="mt-6">
+              <Button
+                disabled={!code}
+                className="w-full"
+                color="blue"
+                appearance="primary"
+                onClick={onSubmitCode}
+              >
+                Submit
+              </Button>
+            </div>
+          </div>
+        )}
+
+        <div className="mt-6 text-center">
+          {!phoneSubmit ? (
+            <>
+              Don't have an account? <Link to="/auth/signup">Sign Up</Link>
+            </>
+          ) : (
+            <>
+              Code not receive?{" "}
+              <Link to="#" onClick={onResendCode}>
+                Send again
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>

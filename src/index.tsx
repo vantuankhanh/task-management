@@ -7,6 +7,7 @@ import { store } from "./store/store";
 import { Suspense } from "react";
 import LoadingLazy from "./components/Loading/LoadingLazy";
 import { BrowserRouter } from "react-router-dom";
+import "rsuite/dist/rsuite.min.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

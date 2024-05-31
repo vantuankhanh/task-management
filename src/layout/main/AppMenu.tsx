@@ -1,28 +1,32 @@
 import { useMemo } from "react";
-import AppMenuitem from "./AppMenuitem";
 import { useUser } from "../../hooks/use-user";
-import { MenuProvider } from "../context/menucontext";
 import { IMenuModel } from "../../models/MenuModel";
+import AppMenuitem from "./AppMenuitem";
+import UserInfoIcon from "@rsuite/icons/Member";
+import FolderFillIcon from "@rsuite/icons/FolderFill";
+import Message from "@rsuite/icons/Message";
+import SignOut from "@rsuite/icons/legacy/SignOut";
 
 const AppMenu = () => {
-  const role = useUser().role;
+  const user = useUser();
+  const role = user ? user.role : 1;
 
   const page: IMenuModel[] = useMemo(() => {
     const temp = [
       {
-        label: "User",
-        icon: <></>,
+        label: "Manage User",
+        icon: <UserInfoIcon />,
         to: "/users",
         visible: role !== 0,
       },
       {
-        label: "Task",
-        icon: <></>,
+        label: "Manage Task",
+        icon: <FolderFillIcon />,
         to: "/tasks",
       },
       {
         label: "Message",
-        icon: <></>,
+        icon: <Message />,
         to: "/messages",
       },
     ];
@@ -30,27 +34,19 @@ const AppMenu = () => {
   }, [role]);
 
   return (
-    <MenuProvider>
-      <div className="flex flex-column h-full">
-        <ul className="layout-menu flex-1">
-          {page.map((item, i) => {
-            return !item?.seperator ? (
-              <AppMenuitem label={item.label} key={item.label} />
-            ) : (
-              <li className="menu-separator"></li>
-            );
-          })}
-        </ul>
-        <div>
-          <hr />
-          <ul className="layout-menu">
-            <ul>
-              <AppMenuitem label="Logout" icon={<></>} to="/auth/logout" />
-            </ul>
-          </ul>
-        </div>
-      </div>
-    </MenuProvider>
+    <div className="sidebar-menu">
+      <ul className="flex-1">
+        {page.map((item, i) => {
+          return <AppMenuitem {...item} key={i + item.label} />;
+        })}
+      </ul>
+
+      <hr className="m-3" />
+
+      <ul>
+        <AppMenuitem label="Sign out" icon={<SignOut />} to="/auth/logout" />
+      </ul>
+    </div>
   );
 };
 

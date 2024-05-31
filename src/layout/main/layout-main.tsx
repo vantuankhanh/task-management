@@ -6,16 +6,15 @@ import { IChildrenProps } from "../../models/ChildrenProps";
 
 const LayoutWrap = ({ children }: IChildrenProps) => {
   return (
-    <div className="w-screen h-screen">
+    <div className="wrapper">
       <AppTopbar />
-      <div className="layout-sidebar">
+      <div className="sidebar">
         <AppSidebar />
       </div>
-      <div className="layout-main-container">
-        <div className="layout-main">{children}</div>
+      <div className="main-container">
+        <div className="main-content">{children}</div>
         <AppFooter />
       </div>
-      <div className="layout-mask"></div>
     </div>
   );
 };
