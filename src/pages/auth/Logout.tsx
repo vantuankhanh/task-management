@@ -1,5 +1,9 @@
+import { Navigate } from "react-router-dom";
+
 const Logout = () => {
-  return <div>Logout</div>;
+  localStorage.clear();
+
+  return <Navigate to="/auth/login" state={{}} />;
 };
 
 export default Logout;

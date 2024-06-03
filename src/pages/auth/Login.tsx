@@ -25,13 +25,18 @@ const Login = () => {
   const [code, setCode] = useState("");
 
   const onCodeChange = (e: string) => {
-    if (e.match(/^\d+$/) || e.length <= 6) {
+    if (e.match(/^\d+$/) && e.length <= 6) {
       setCode(e);
     }
   };
 
   // TODO: submit otp
-  const onSubmitCode = () => {};
+  const onSubmitCode = () => {
+    nav("/employee");
+  };
+
+  // TODO: resen otp
+  const onResendCode = () => {};
 
   const onBackClick = () => {
     if (phoneSubmit) {
@@ -41,9 +46,6 @@ const Login = () => {
       nav("/");
     }
   };
-
-  // TODO: resen otp
-  const onResendCode = () => {};
 
   return (
     <div className="box-center flex-col bg-white min-h-full min-w-full overflow-hidden px-4">
@@ -99,9 +101,11 @@ const Login = () => {
               <div className="text-gray-900 text-3xl font-bold mb-3">
                 Phone verification
               </div>
-              <span className="text-gray-500 font-medium">
-                Please enter your code that send to your phone
-              </span>
+              <p className="text-gray-500 font-medium">
+                Please enter your code
+                <br />
+                that send to your phone
+              </p>
             </div>
 
             <div>
