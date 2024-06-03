@@ -13,3 +13,10 @@ export const useUser = () => {
 
   return useMemo(() => data, [data]);
 };
+
+export const useRole = () => {
+  const user = useUser();
+  const role = user ? user.role : 0;
+
+  return useMemo(() => role, [role]);
+};

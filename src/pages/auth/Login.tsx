@@ -1,10 +1,15 @@
 import ArowBackIcon from "@rsuite/icons/ArowBack";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Input } from "rsuite";
+import { Button, Input, InputGroup, Tooltip, Whisper } from "rsuite";
+import { sendVerifyCode, submitVerifyCode } from "../../services/login";
+import { setLoading } from "../../store/reducer/reducer";
+import { useAppDispatch } from "../../store/store";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const nav = useNavigate();
+  const dispatch = useAppDispatch();
 
   const [phoneNumber, setPhoneNumber] = useState("");
   const [phoneSubmit, setPhoneSubmit] = useState("");
@@ -16,9 +21,17 @@ const Login = () => {
   };
 
   // TODO: call api send otp
-  const onSubmitPhone = () => {
+  const onSubmitPhone = async () => {
     if (phoneNumber.match(/^\d+$/)) {
+      dispatch(setLoading(true));
       setPhoneSubmit(phoneNumber);
+
+      const res = await sendVerifyCode("phoneNumber", `+${phoneNumber}`);
+      if (!res || res.status > 300) {
+        toast.error("Failed to send verification code");
+      }
+
+      dispatch(setLoading(false));
     }
   };
 
@@ -31,12 +44,26 @@ const Login = () => {
   };
 
   // TODO: submit otp
-  const onSubmitCode = () => {
-    nav("/employee");
+  const onSubmitCode = async () => {
+    dispatch(setLoading(true));
+
+    const res = await submitVerifyCode("phoneNumber", code, `+${phoneSubmit}`);
+
+    if (res) {
+      if (res.status >= 200 && res.status < 300) {
+        localStorage.setItem("refresh_token", res.data.data.refreshToken);
+
+        nav("/employee");
+      }
+    } else {
+      toast.error("Failed to verify code");
+    }
+
+    dispatch(setLoading(false));
   };
 
   // TODO: resen otp
-  const onResendCode = () => {};
+  const onResendCode = async () => {};
 
   const onBackClick = () => {
     if (phoneSubmit) {
@@ -74,13 +101,24 @@ const Login = () => {
             </div>
 
             <div>
-              <Input
-                className="w-full"
-                placeholder="Your Phone Number"
-                value={phoneNumber}
-                onChange={onPhoneNumberChange}
-                autoComplete="tel-national"
-              />
+              <Whisper
+                placement="bottom"
+                speaker={
+                  <Tooltip>Please input your phone with country code</Tooltip>
+                }
+              >
+                <InputGroup inside>
+                  <InputGroup.Addon>+</InputGroup.Addon>
+                  <Input
+                    className="w-full"
+                    placeholder="Your Phone Number"
+                    value={phoneNumber}
+                    onChange={onPhoneNumberChange}
+                    autoComplete="tel-national"
+                    prefix="+"
+                  />
+                </InputGroup>
+              </Whisper>
             </div>
 
             <div className="mt-6">

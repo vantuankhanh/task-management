@@ -8,6 +8,7 @@ import { Suspense } from "react";
 import LoadingLazy from "./components/Loading/LoadingLazy";
 import { BrowserRouter } from "react-router-dom";
 import "rsuite/dist/rsuite.min.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

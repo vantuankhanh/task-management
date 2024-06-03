@@ -1,10 +1,23 @@
-import { Table } from "rsuite";
+import { IEmployeeModel } from "../../models/EmployeeModel";
 
-const TableUser = () => {
+interface ITableUserProps {
+  empLst: IEmployeeModel[];
+}
+
+const TableUser = ({ empLst }: ITableUserProps) => {
   return (
-    <>
-      <Table hover></Table>
-    </>
+    <table className="w-full">
+      <thead>
+        <tr>
+          <td>No.</td>
+          <td>Email</td>
+          <td>Name</td>
+          <td>Phone number</td>
+          <td>Status</td>
+          <td>Role</td>
+        </tr>
+      </thead>
+    </table>
   );
 };
 

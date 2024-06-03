@@ -1,17 +1,16 @@
-import { Navigate } from "react-router-dom";
-import { useUser } from "../hooks/use-user";
 import { lazy } from "react";
+import { Navigate } from "react-router-dom";
+import { useRole } from "../hooks/use-user";
 
 const EmployeeAdmin = lazy(() => import("../section/employee/EmployeeAdmin"));
 
 const Employee = () => {
-  const user = useUser();
-  const role = user ? user.role : 1;
+  const role = useRole();
 
-  if (role !== 0) {
-    return <EmployeeAdmin />;
-  }
-  return <Navigate to="/auth/access" />;
+  // if (role !== 0) {
+  return <EmployeeAdmin />;
+  // }
+  // return <Navigate to="/auth/access" />;
 };
 
 export default Employee;

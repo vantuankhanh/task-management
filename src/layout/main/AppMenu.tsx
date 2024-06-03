@@ -1,15 +1,14 @@
-import { useMemo } from "react";
-import { useUser } from "../../hooks/use-user";
-import { IMenuModel } from "../../models/MenuModel";
-import AppMenuitem from "./AppMenuitem";
-import UserInfoIcon from "@rsuite/icons/Member";
 import FolderFillIcon from "@rsuite/icons/FolderFill";
+import UserInfoIcon from "@rsuite/icons/Member";
 import Message from "@rsuite/icons/Message";
 import SignOut from "@rsuite/icons/legacy/SignOut";
+import { useMemo } from "react";
+import { useRole } from "../../hooks/use-user";
+import { IMenuModel } from "../../models/MenuModel";
+import AppMenuitem from "./AppMenuitem";
 
 const AppMenu = () => {
-  const user = useUser();
-  const role = user ? user.role : 1;
+  const role = useRole();
 
   const page: IMenuModel[] = useMemo(() => {
     const temp = [
@@ -17,7 +16,9 @@ const AppMenu = () => {
         label: "Manage Employee",
         icon: <UserInfoIcon />,
         to: "/employee",
-        visible: role !== 0,
+        // TODO: set visible to role
+        // visible: role !== 0,
+        visible: true,
       },
       {
         label: "Manage Task",

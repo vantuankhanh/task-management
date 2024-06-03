@@ -8,12 +8,12 @@ interface ILoginPrivateRouteProps {
 const LoginPrivateRoute = ({ children }: ILoginPrivateRouteProps) => {
   const token = localStorage.getItem("refresh_token");
 
-  if (!token) {
-    clearAllCookie();
-    localStorage.clear();
+  // if (!token) {
+  //   clearAllCookie();
+  //   localStorage.clear();
 
-    return <Navigate to="/auth/login" />;
-  }
+  //   return <Navigate to="/auth/login" />;
+  // }
 
   return <>{children}</>;
 };
