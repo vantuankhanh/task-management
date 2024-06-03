@@ -14,9 +14,9 @@ const AppMenu = () => {
   const page: IMenuModel[] = useMemo(() => {
     const temp = [
       {
-        label: "Manage User",
+        label: "Manage Employee",
         icon: <UserInfoIcon />,
-        to: "/users",
+        to: "/employee",
         visible: role !== 0,
       },
       {
