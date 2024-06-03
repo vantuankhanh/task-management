@@ -15,7 +15,7 @@ const Signup = lazy(() => import("../pages/auth/Signup"));
 /* ----------------------------PAGE--------------------------------- */
 
 const Homepage = lazy(() => import("../pages/Homepage"));
-const Users = lazy(() => import("../pages/Users"));
+const Employee = lazy(() => import("../pages/Employee"));
 const Tasks = lazy(() => import("../pages/Tasks"));
 const Messages = lazy(() => import("../pages/Messages"));
 
@@ -40,7 +40,7 @@ const Router = () => {
         </LoginPrivateRoute>
       ),
       children: [
-        { path: "users", element: <Users /> },
+        { path: "employee", element: <Employee /> },
         { path: "tasks", element: <Tasks /> },
         { path: "messages", element: <Messages /> },
       ],
