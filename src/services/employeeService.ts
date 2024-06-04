@@ -6,7 +6,6 @@ export const getEmployee = async (id: string = "") => {
     process.env.REACT_APP_URL_GET_EMPLOYEE,
     {},
     {
-      messageSuccess: "Successfully fetch employee",
       messageFail: "Fetch employee failed",
     }
   );
