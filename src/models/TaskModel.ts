@@ -1,14 +1,10 @@
 export interface ITaskModel {
   id?: string;
-  user_mail: string;
-  project_id: string;
-  time_start: string;
-  time_end: string;
+  employeeEmail?: string;
+  employeeId: string;
+  content: string;
+  dateStart: string;
+  dateEnd: string;
   status: number;
-  note: string;
-}
-
-export interface ITaskInfo {
-  label: string;
-  taskList: ITaskModel[];
+  lastUpdatedBy: string;
 }

@@ -7,10 +7,10 @@ const EmployeeAdmin = lazy(() => import("../section/employee/EmployeeAdmin"));
 const Employee = () => {
   const role = useRole();
 
-  // if (role !== 0) {
-  return <EmployeeAdmin />;
-  // }
-  // return <Navigate to="/auth/access" />;
+  if (role !== 0) {
+    return <EmployeeAdmin />;
+  }
+  return <Navigate to="/auth/access" />;
 };
 
 export default Employee;

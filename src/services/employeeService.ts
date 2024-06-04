@@ -2,18 +2,18 @@ import { IEmployeeModel } from "../models/EmployeeModel";
 import { deleteAPI, postAPI, putAPI } from "./apiFunction";
 
 export const getEmployee = async (id: string = "") => {
-  const data: IEmployeeModel[] = await postAPI(
+  const data = await postAPI(
     process.env.REACT_APP_URL_GET_EMPLOYEE,
-    {},
+    { id },
     {
       messageFail: "Fetch employee failed",
     }
   );
-  return data;
+  return data.data as IEmployeeModel[];
 };
 
 export const updateEmployee = async (item: IEmployeeModel) =>
-  await putAPI(process.env.REACT_APP_URL_UPDATE_EMPLOYEE, item, {
+  await postAPI(process.env.REACT_APP_URL_UPDATE_EMPLOYEE, item, {
     messageSuccess: "Successfully updated employee",
     messageFail: "Updated employee failed",
   });

@@ -16,9 +16,7 @@ const AppMenu = () => {
         label: "Manage Employee",
         icon: <UserInfoIcon />,
         to: "/employee",
-        // TODO: set visible to role
-        // visible: role !== 0,
-        visible: true,
+        visible: role !== 0,
       },
       {
         label: "Manage Task",
