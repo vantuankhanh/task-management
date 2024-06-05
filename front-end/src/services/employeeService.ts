@@ -18,6 +18,9 @@ export const updateEmployee = async (item: IEmployeeModel) =>
     messageFail: "Updated employee failed",
   });
 
+export const createPassword = async (password: string, id: string) =>
+  await postAPI(process.env.REACT_APP_URL_CREATE_PASSWORD, { password, id });
+
 export const createEmployee = async (item: IEmployeeModel) =>
   await postAPI(process.env.REACT_APP_URL_CREATE_EMPLOYEE, item, {
     messageSuccess: "Successfully created employee",

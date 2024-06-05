@@ -3,6 +3,7 @@ const router = express.Router();
 const {
   loginAccount,
   refreshToken,
+  createPassword,
 } = require("../controllers/auth/loginAccount.controller");
 const {
   createNewAccessCode,
@@ -11,6 +12,7 @@ const {
 
 router.post("/login", loginAccount);
 router.get("/refresh-token", refreshToken);
+router.post("/create-password", createPassword);
 router.post("/send-verify-code", createNewAccessCode);
 router.post("/validate-code", validateAccessCode);
 

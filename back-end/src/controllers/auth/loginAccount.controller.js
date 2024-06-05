@@ -1,6 +1,7 @@
 const { db } = require("../../connection/firebase.connection");
 const { errorHandler } = require("../../loggers/errorHandler");
 const { response } = require("../../utils/responseBuilder");
+const { hashPassword } = require("../../utils/hashBcrypt");
 const {
   GenerateAccessToken,
   GenerateRefreshToken,
@@ -104,7 +105,40 @@ const refreshToken = async (req, res) => {
   }
 };
 
+const createPassword = async (req, res) => {
+  try {
+    const password = req.body.password;
+    const id = req.body.id;
+
+    if (!id) {
+      return response(res, null, "Required id", 400);
+    }
+    if (!password) {
+      return response(res, null, "Required password", 400);
+    }
+
+    const passwordHashed = await hashPassword(password);
+
+    const employeeRef = db.collection("employee").doc(id);
+    await employeeRef.update({
+      password: passwordHashed,
+      sys_entry_date: new Date().toISOString(),
+    });
+
+    return response(
+      res,
+      { success: true },
+      "Successfully created password",
+      201
+    );
+  } catch (error) {
+    errorHandler(error, "create password");
+    response(res, { success: false }, "Internal server error", 500);
+  }
+};
+
 module.exports = {
   loginAccount,
   refreshToken,
+  createPassword,
 };

@@ -5,6 +5,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const cors = require("cors");
+const socket = require("socket.io");
 
 const authRoute = require("./src/routes/auth.routes");
 const pageAuth = require("./src/routes/page.routes");
@@ -42,8 +43,32 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-app.listen(process.env.PORT || "4000", () => {
+const server = app.listen(process.env.PORT || "4000", () => {
   console.log(`App 🖥️  is running ❤️  on port:: ${process.env.PORT || "4000"}`);
 });
 
-module.exports = { app };
+const io = socket(server, {
+  cors: {
+    origin: process.env.APP_URL,
+  },
+});
+
+var currentUsers = [];
+
+io.on("connection", (socket) => {
+  socket.on("connectServer", (employeeId) => {
+    console.log(`Employee ${employeeId} has connected`);
+    currentUsers[employeeId] = socket.id;
+  });
+
+  socket.on("sendMessage", ({ to, message }) => {
+    const sender = currentUsers[to];
+    if (sender) {
+      socket.to(sender).emit("receiveMessage", message);
+    }
+  });
+
+  socket.on("disconnect", ({ employeeId }) => {
+    console.log(`Employee ${employeeId} has disconnected`);
+  });
+});

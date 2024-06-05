@@ -99,7 +99,7 @@ const createEmployee = async (req, res, next) => {
     const send = await sendEmail(
       email,
       "ACCOUNT CREATED",
-      `You have been created an account for Task Manager.\nPlease create your password via: ${APP_URL}/signup-email?id=${ans.id}`
+      `You have been created an account for Task Manager.\nPlease create your password via: ${APP_URL}/auth/signup-email?id=${ans.id}`
     );
 
     return response(

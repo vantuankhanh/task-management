@@ -69,7 +69,9 @@ const LoginEmail = ({ setType, onSubmit, onVerifyCode }: ILoginEmailProps) => {
 
   return (
     <>
-      <div className="absolute top-0 left-0 p-5">
+      <div
+        className={`absolute top-0 left-0 p-5 ${!emailSubmit ? "hidden" : ""}`}
+      >
         <Button appearance="subtle" onClick={onBackClick}>
           <div className="box-center gap-2">
             <ArowBackIcon />

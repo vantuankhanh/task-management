@@ -10,7 +10,7 @@ const AccessDeniedPage = lazy(() => import("../pages/auth/Access"));
 const Login = lazy(() => import("../pages/auth/Login"));
 const Logout = lazy(() => import("../pages/auth/Logout"));
 const NotFound = lazy(() => import("../pages/auth/NotFound"));
-const Signup = lazy(() => import("../pages/auth/Signup"));
+const SignupEmail = lazy(() => import("../pages/auth/SignupEmail"));
 
 /* ----------------------------PAGE--------------------------------- */
 
@@ -51,7 +51,7 @@ const Router = () => {
           ),
         },
         { path: "logout", element: <Logout /> },
-        { path: "signup", element: <Signup /> },
+        { path: "signup-email", element: <SignupEmail /> },
         { path: "access", element: <AccessDeniedPage /> },
       ],
     },
