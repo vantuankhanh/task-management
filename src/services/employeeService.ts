@@ -1,10 +1,10 @@
 import { IEmployeeModel } from "../models/EmployeeModel";
 import { deleteAPI, postAPI, putAPI } from "./apiFunction";
 
-export const getEmployee = async (id: string = "") => {
+export const getEmployee = async (id: string = "", role: number = 0) => {
   const data = await postAPI(
     process.env.REACT_APP_URL_GET_EMPLOYEE,
-    { id },
+    { id, role },
     {
       messageFail: "Fetch employee failed",
     }
