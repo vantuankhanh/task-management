@@ -33,8 +33,6 @@ const LoginPassword = ({ setType }: ILoginPasswordProps) => {
 
           nav("/employee");
         }
-      } else {
-        toast.error("Failed to log in");
       }
 
       dispatch(setLoading(false));
