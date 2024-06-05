@@ -21,7 +21,7 @@ export const getAPI = async (url: string, option?: IAPIFunctionOptionProps) =>
       }
     })
     .catch((error) => {
-      toast.error(option?.messageFail || error.response.data.message);
+      toast.error(option?.messageFail || error.response?.data.message);
       return false;
     });
 
@@ -42,7 +42,7 @@ export const postAPI = async (
       }
     })
     .catch((error) => {
-      toast.error(option?.messageFail || error.response.data.message);
+      toast.error(option?.messageFail || error.response?.data.message);
       return false;
     });
 
@@ -63,7 +63,7 @@ export const putAPI = async (
       }
     })
     .catch((error) => {
-      toast.error(option?.messageFail || error.response.data.message);
+      toast.error(option?.messageFail || error.response?.data.message);
       return false;
     });
 
@@ -87,6 +87,6 @@ export const deleteAPI = async (
       }
     })
     .catch((error) => {
-      toast.error(option?.messageFail || error.response.data.message);
+      toast.error(option?.messageFail || error.response?.data.message);
       return false;
     });
