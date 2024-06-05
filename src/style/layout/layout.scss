@@ -8,3 +8,17 @@
   flex-direction: column;
   background-color: rgb(245, 245, 245);
 }
+
+::-webkit-scrollbar {
+  width: 0.2rem;
+
+  &-track {
+    background-color: #f1f1f1;
+  }
+
+  &-thumb {
+    background-color: #a3a3a3;
+    width: 0.1rem;
+    border-radius: 1rem;
+  }
+}
