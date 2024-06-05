@@ -69,8 +69,8 @@ const TableTask = ({ empList, taskLst, getTask }: ITableTaskProps) => {
         <thead>
           <tr>
             <td>No.</td>
-            <td className="max-w-24">Employee Email</td>
-            <td className="min-w-64">Content</td>
+            <td className="w-3/12">Employee Email</td>
+            <td className="w-3/12">Content</td>
             <td>Time Start</td>
             <td>Time End</td>
             <td>Status</td>
@@ -83,12 +83,15 @@ const TableTask = ({ empList, taskLst, getTask }: ITableTaskProps) => {
             {taskLst.map((e, i) => (
               <tr key={e.id ?? "" + i} className="hover:bg-gray-200">
                 <td>{i + 1}</td>
-                <td className="break-all" style={{ textAlign: "left" }}>
+                <td
+                  className="break-all"
+                  style={{ textAlign: "left", padding: "1rem 2rem" }}
+                >
                   {e.employeeEmail}
                 </td>
                 <td
                   className="text-wrap break-all"
-                  style={{ textAlign: "left", padding: "1rem 1.5rem" }}
+                  style={{ textAlign: "left", padding: "1rem 2rem" }}
                 >
                   {e.content}
                 </td>

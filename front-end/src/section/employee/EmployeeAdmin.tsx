@@ -15,7 +15,11 @@ const EmployeeAdmin = () => {
 
   const getEmpLst = async () => {
     dispatch(setLoading(true));
-    const data = await getEmployee();
+    let data = await getEmployee();
+
+    if (data) {
+      data = data.sort((p, n) => (n.role ?? 0) - (p.role ?? 0));
+    }
     setEmpLst(data ?? []);
     setEmpLstFilter(data ?? []);
     dispatch(setLoading(false));

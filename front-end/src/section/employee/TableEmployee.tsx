@@ -28,9 +28,9 @@ const TableEmployee = ({
       <table className="w-full table-border">
         <thead>
           <tr>
-            <td>No.</td>
-            <td>Email</td>
-            <td>Name</td>
+            <td className="max-w-10">No.</td>
+            <td className="w-3/12">Email</td>
+            <td className="w-3/12">Name</td>
             <td>Phone number</td>
             <td>Status</td>
             <td>Role</td>
@@ -43,8 +43,8 @@ const TableEmployee = ({
             {empLst.map((e, i) => (
               <tr key={e.id ?? "" + i} className="hover:bg-gray-200">
                 <td>{i + 1}</td>
-                <td style={{ textAlign: "left" }}>{e.email}</td>
-                <td style={{ textAlign: "left" }}>{e.name}</td>
+                <td>{e.email}</td>
+                <td>{e.name}</td>
                 <td>{e.phoneNumber}</td>
                 <td>
                   <div className="box-center">
