@@ -52,16 +52,13 @@ const Router = () => {
         },
         { path: "logout", element: <Logout /> },
         { path: "signup-email", element: <SignupEmail /> },
-        { path: "access", element: <AccessDeniedPage /> },
+        { path: "403", element: <AccessDeniedPage /> },
+        { path: "404", element: <NotFound /> },
       ],
     },
     {
-      path: "404",
-      element: <NotFound />,
-    },
-    {
       path: "*",
-      element: <Navigate to="/404" replace />,
+      element: <Navigate to="/auth/404" replace />,
     },
   ]);
 

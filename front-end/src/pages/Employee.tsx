@@ -10,7 +10,7 @@ const Employee = () => {
   if (role !== 0) {
     return <EmployeeAdmin />;
   }
-  return <Navigate to="/auth/access" />;
+  return <Navigate to="/auth/403" />;
 };
 
 export default Employee;
