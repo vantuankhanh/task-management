@@ -87,7 +87,7 @@ const TableEmployee = ({
 
       {empLst.length === 0 && (
         <div className="p-4 text-xl border-b border-gray-400">
-          There is no Employee founded
+          There is no Employee found
         </div>
       )}
     </>

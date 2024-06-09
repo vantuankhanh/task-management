@@ -153,7 +153,7 @@ const TableTask = ({ empList, taskLst, getTask }: ITableTaskProps) => {
 
       {taskLst.length === 0 && (
         <div className="p-4 text-xl border-b border-gray-400">
-          There is no Task founded
+          There is no Task found
         </div>
       )}
     </>
