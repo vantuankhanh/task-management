@@ -53,7 +53,7 @@ const io = socket(server, {
   },
 });
 
-var currentUsers = [];
+var currentUsers = {};
 
 io.on("connection", (socket) => {
   socket.on("connectServer", (employeeId) => {

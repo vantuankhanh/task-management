@@ -1,17 +1,17 @@
-import { useEffect, useRef, useState } from "react";
-import { Button, Input } from "rsuite";
-import { IEmployeeModel } from "../../models/EmployeeModel";
-import { Socket } from "socket.io-client";
-import { createMessage } from "../../services/messageService";
-import { useUser } from "../../hooks/use-user";
-import { IMessageModel } from "../../models/MessageModel";
-import { useAppSelector } from "../../store/store";
 import SpinnerIcon from "@rsuite/icons/legacy/Spinner";
+import { useEffect, useRef } from "react";
+import { Button, Input } from "rsuite";
+import { Socket } from "socket.io-client";
+import { useUser } from "../../hooks/use-user";
+import { IEmployeeModel } from "../../models/EmployeeModel";
+import { IMessageModel } from "../../models/MessageModel";
+import { createMessage } from "../../services/messageService";
+import { useAppSelector } from "../../store/store";
 
 interface IMessageAreaProps {
   currentUser: IEmployeeModel | null;
   messageLst: IMessageModel[];
-  socket: Socket | undefined;
+  socket: React.MutableRefObject<Socket | undefined>;
   setMessageLst: (value: React.SetStateAction<IMessageModel[]>) => void;
 }
 
@@ -25,28 +25,6 @@ const MessageArea = ({
   const user = useUser();
   const messageRef = useRef<HTMLDivElement>(null);
 
-  const [message, setMessage] = useState<IMessageModel | null>(null);
-
-  useEffect(() => {
-    if (socket) {
-      socket.on("receiveMessage", (message: string) => {
-        setMessage({
-          isFrom: false,
-          message,
-          createdAt: new Date().toISOString(),
-        });
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (message) {
-      setMessageLst((prev) => [...prev, message]);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [message]);
-
   useEffect(() => {
     if (messageRef && messageRef.current) {
       messageRef.current.scrollIntoView({ behavior: "smooth" });
@@ -58,12 +36,14 @@ const MessageArea = ({
   const handleSendMessage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (inputMessRef && inputMessRef.current && socket && currentUser) {
+    if (inputMessRef && inputMessRef.current && socket.current && currentUser) {
       const message = inputMessRef.current.value;
+
+      if (!message) return;
 
       inputMessRef.current.value = "";
 
-      socket.emit("sendMessage", {
+      socket.current.emit("sendMessage", {
         to: currentUser.id,
         message,
       });

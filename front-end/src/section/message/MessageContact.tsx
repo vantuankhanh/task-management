@@ -5,18 +5,13 @@ import { getEmployee } from "../../services/employeeService";
 import { setLoading } from "../../store/reducer/reducer";
 import { Input, InputGroup } from "rsuite";
 import SearchIcon from "@rsuite/icons/Search";
-import { IMessageModel } from "../../models/MessageModel";
 import { useUser } from "../../hooks/use-user";
 
 interface IMessageContactProps {
   setCurrentChat: (value: React.SetStateAction<IEmployeeModel | null>) => void;
-  setMessageLst: (value: React.SetStateAction<IMessageModel[]>) => void;
 }
 
-const MessageContact = ({
-  setCurrentChat,
-  setMessageLst,
-}: IMessageContactProps) => {
+const MessageContact = ({ setCurrentChat }: IMessageContactProps) => {
   const dispatch = useAppDispatch();
   const user = useUser();
 
@@ -40,7 +35,6 @@ const MessageContact = ({
   const [currentEmployee, setCurrentEmployee] = useState<number | null>(null);
   const onEmployeeSelect = (employee: IEmployeeModel, index: number) => () => {
     if (currentEmployee !== index) {
-      setMessageLst([]);
       setCurrentEmployee(index);
       setCurrentChat(employee);
     }

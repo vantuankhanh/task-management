@@ -20,12 +20,28 @@ const Messages = () => {
     if (user && socket) {
       socket.current = io(process.env.REACT_APP_SOCKET_IO_URL);
       socket.current.emit("connectServer", user.id);
+      socket.current.on("receiveMessage", (message: string) => {
+        console.log("received message");
+        setMessage({
+          isFrom: false,
+          message,
+          createdAt: new Date().toISOString(),
+        });
+      });
     }
   }, [user]);
 
   const [currentUser, setCurrentUser] = useState<IEmployeeModel | null>(null);
 
+  const [message, setMessage] = useState<IMessageModel | null>(null);
   const [messageLst, setMessageLst] = useState<IMessageModel[]>([]);
+
+  useEffect(() => {
+    if (message) {
+      setMessageLst((prev) => [...prev, message]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [message]);
 
   useEffect(() => {
     (async () => {
@@ -41,15 +57,12 @@ const Messages = () => {
 
   return (
     <div className="message-wrapper">
-      <MessageContact
-        setCurrentChat={setCurrentUser}
-        setMessageLst={setMessageLst}
-      />
+      <MessageContact setCurrentChat={setCurrentUser} />
 
       <MessageArea
         currentUser={currentUser}
         messageLst={messageLst}
-        socket={socket.current}
+        socket={socket}
         setMessageLst={setMessageLst}
       />
     </div>
