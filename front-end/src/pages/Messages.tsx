@@ -21,7 +21,6 @@ const Messages = () => {
       socket.current = io(process.env.REACT_APP_SOCKET_IO_URL);
       socket.current.emit("connectServer", user.id);
       socket.current.on("receiveMessage", (message: string) => {
-        console.log("received message");
         setMessage({
           isFrom: false,
           message,
