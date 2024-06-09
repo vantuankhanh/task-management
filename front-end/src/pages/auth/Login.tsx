@@ -69,7 +69,7 @@ const Login = () => {
       if (res.status >= 200 && res.status < 300) {
         localStorage.setItem("refresh_token", res.data.data.refreshToken);
 
-        nav("/employee");
+        nav("/");
       }
     } else {
       toast.error("Failed to verify code");

@@ -31,7 +31,7 @@ export const deleteTask = async (taskId: string) => {
 
 export const getTask = async (employeeId?: string) => {
   const data = await postAPI(process.env.REACT_APP_URL_GET_TASK, {
-    employeeId: employeeId ?? "",
+    employeeId,
   });
   return data.data as ITaskModel[];
 };

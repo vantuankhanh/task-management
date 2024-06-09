@@ -25,7 +25,7 @@ const Tasks = () => {
 
   const getTaskLst = async () => {
     dispatch(setLoading(true));
-    const data = role === 0 ? await getTask(user?.id ?? "") : await getTask();
+    const data = role === 0 ? await getTask(user!.id) : await getTask();
     setTaskLst(data ?? []);
     dispatch(setLoading(false));
   };

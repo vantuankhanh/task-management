@@ -7,7 +7,7 @@ const getTask = async (req, res, next) => {
   try {
     console.log("----------> Get task");
 
-    const { employeeId } = req.params;
+    const { employeeId } = req.body;
 
     let employeeSnap = await db.collection("employee").get();
     let employee = {};
