@@ -12,7 +12,7 @@ const LoginPrivateRoute = ({ children }: ILoginPrivateRouteProps) => {
     clearAllCookie();
     localStorage.clear();
 
-    return <Navigate to="/logout" />;
+    return <Navigate to="/auth/logout" />;
   }
 
   return <>{children}</>;
