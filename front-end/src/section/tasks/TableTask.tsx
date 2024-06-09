@@ -5,6 +5,7 @@ import { ITaskModel } from "../../models/TaskModel";
 import "../../style/table.scss";
 import ModalCreateUpdateTask from "./ModalCreatUpdateTask";
 import ModalDeleteTask from "./ModalDeleteTask";
+import { useRole } from "../../hooks/use-user";
 
 interface ITableTaskProps {
   empList: IEmployeeModel[];
@@ -13,6 +14,8 @@ interface ITableTaskProps {
 }
 
 const TableTask = ({ empList, taskLst, getTask }: ITableTaskProps) => {
+  const role = useRole();
+
   const [idDelete, setIdDelete] = useState<string | null>(null);
 
   const [visibleUpdate, setVisibleUpdate] = useState(false);
@@ -56,11 +59,13 @@ const TableTask = ({ empList, taskLst, getTask }: ITableTaskProps) => {
           </div>
 
           <div className="flex gap-4 items-center">
-            <div>
-              <Button appearance="ghost" onClick={openCreateModal}>
-                + Create Task
-              </Button>
-            </div>
+            {role !== 0 && (
+              <div>
+                <Button appearance="ghost" onClick={openCreateModal}>
+                  + Create Task
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </div>
