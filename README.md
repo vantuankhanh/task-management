@@ -46,7 +46,7 @@ yarn start
 ├───public
 └───src
     ├───assets
-    ├───components ---> Common components such as the Loading cover
+    ├───components ---> Common components
     ├───hooks ---> Custom hooks for the project
     ├───layout ---> Layout of the page
     ├───models ---> Interface of data getting from the backend
