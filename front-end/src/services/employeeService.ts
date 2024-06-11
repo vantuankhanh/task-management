@@ -5,9 +5,7 @@ export const getEmployee = async (id: string = "", role?: number) => {
   const data = await postAPI(
     process.env.REACT_APP_URL_GET_EMPLOYEE,
     { id, role },
-    {
-      messageFail: "Fetch employee failed",
-    }
+    { messageFail: "Fetch employee failed" }
   );
   return data.data as IEmployeeModel[];
 };
@@ -15,7 +13,6 @@ export const getEmployee = async (id: string = "", role?: number) => {
 export const updateEmployee = async (item: IEmployeeModel) =>
   await postAPI(process.env.REACT_APP_URL_UPDATE_EMPLOYEE, item, {
     messageSuccess: "Successfully updated employee",
-    messageFail: "Updated employee failed",
   });
 
 export const createPassword = async (password: string, id: string) =>
@@ -24,31 +21,21 @@ export const createPassword = async (password: string, id: string) =>
 export const createEmployee = async (item: IEmployeeModel) =>
   await postAPI(process.env.REACT_APP_URL_CREATE_EMPLOYEE, item, {
     messageSuccess: "Successfully created employee",
-    messageFail: "Created employee failed",
   });
 
 export const deleteEmployee = async (id: string) =>
   await deleteAPI(
     process.env.REACT_APP_URL_GET_EMPLOYEE,
     { id },
-    {
-      messageSuccess: "Successfully deleted employee",
-      messageFail: "Deleted employee failed",
-    }
+    { messageSuccess: "Successfully deleted employee" }
   );
 
 export const changeRoleEmployee = async (item: IEmployeeModel) => {
   if (item.role && item.role > 0) {
     const res = await putAPI(
       process.env.REACT_APP_URL_UPDATE_EMPLOYEE,
-      {
-        id: item.id,
-        role: 0,
-      },
-      {
-        messageSuccess: `Successfully change role to normal employee`,
-        messageFail: "Changed role failed",
-      }
+      { id: item.id, role: 0 },
+      { messageSuccess: `Successfully change role to normal employee` }
     );
     return res;
   }

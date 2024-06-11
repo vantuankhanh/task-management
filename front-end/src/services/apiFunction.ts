@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import axiosCustom from "./axios_custom";
 
 interface IAPIFunctionOptionProps {
+  messageAPI?: boolean;
   messageSuccess?: string;
   messageFail?: string;
   configAPI?: AxiosRequestConfig<any>;
@@ -13,10 +14,15 @@ export const getAPI = async (url: string, option?: IAPIFunctionOptionProps) =>
     .get(process.env.REACT_APP_BASE_URL + url, { ...option?.configAPI })
     .then((res) => {
       if (res.status >= 200 && res.status < 300) {
-        option?.messageSuccess && toast.success(option.messageSuccess);
+        option?.messageSuccess &&
+          toast.success(
+            option.messageSuccess || (option.messageAPI && res.data.message)
+          );
         return res.data;
       } else {
-        toast.error(option?.messageFail || "Something went wrong");
+        toast.error(
+          option?.messageFail || res.data.message || "Something went wrong"
+        );
         return false;
       }
     })
@@ -34,10 +40,15 @@ export const postAPI = async (
     .post(process.env.REACT_APP_BASE_URL + url, data, { ...option?.configAPI })
     .then((res) => {
       if (res.status >= 200 && res.status < 300) {
-        option?.messageSuccess && toast.success(option.messageSuccess);
+        option?.messageSuccess &&
+          toast.success(
+            option.messageSuccess || (option.messageAPI && res.data.message)
+          );
         return res.data;
       } else {
-        toast.error(option?.messageFail || "Something went wrong");
+        toast.error(
+          option?.messageFail || res.data.message || "Something went wrong"
+        );
         return false;
       }
     })
@@ -55,10 +66,15 @@ export const putAPI = async (
     .put(process.env.REACT_APP_BASE_URL + url, data, { ...option?.configAPI })
     .then((res) => {
       if (res.status >= 200 && res.status < 300) {
-        option?.messageSuccess && toast.success(option.messageSuccess);
+        option?.messageSuccess &&
+          toast.success(
+            option.messageSuccess || (option.messageAPI && res.data.message)
+          );
         return res.data;
       } else {
-        toast.error(option?.messageFail || "Something went wrong");
+        toast.error(
+          option?.messageFail || res.data.message || "Something went wrong"
+        );
         return false;
       }
     })
@@ -79,10 +95,15 @@ export const deleteAPI = async (
     })
     .then((res) => {
       if (res.status >= 200 && res.status < 300) {
-        option?.messageSuccess && toast.success(option.messageSuccess);
+        option?.messageSuccess &&
+          toast.success(
+            option.messageSuccess || (option.messageAPI && res.data.message)
+          );
         return res.data;
       } else {
-        toast.error(option?.messageFail || "Something went wrong");
+        toast.error(
+          option?.messageFail || res.data.message || "Something went wrong"
+        );
         return false;
       }
     })

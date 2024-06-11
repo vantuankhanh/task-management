@@ -83,7 +83,6 @@ const ModalCreateUpdateEmployee = ({
       return;
     }
 
-    setVisible(false);
     dispatch(setLoading(true));
     let data;
     if (item) {
@@ -107,6 +106,7 @@ const ModalCreateUpdateEmployee = ({
     dispatch(setLoading(false));
 
     if (data) {
+      setVisible(false);
       await getEmployee();
     }
   };
