@@ -2,7 +2,7 @@
 
 This is an app using to manage employee and their assignment tasks. You should probably use the following command to configure the manager for your application
 
-### Requirements
+## Requirements
 
 - [Nodejs](https://nodejs.org/en/download)
 - [Firebase Account](https://firebase.google.com/docs)
@@ -11,7 +11,7 @@ This is an app using to manage employee and their assignment tasks. You should p
 
 ![home page](./image/app.png)
 
-# Installation
+## Installation
 
 Clone the repository
 
@@ -40,7 +40,7 @@ Now run the front end
 yarn start
 ```
 
-### Project Structure
+### FrontEnd Folder Structure
 
 ```bash
 ├───public
@@ -85,7 +85,7 @@ Then start the back end
 npm start
 ```
 
-### Project Structure
+### BackEnd Folder Structure
 
 ```bash
 ├───logs ---> Log the error occurred during running the project
